@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { AbBotao } from 'ds-alurabooks'
 import { useCarrinho } from '@/graphql/carrinho/hooks'
+import { formatador } from '@/utils/formatador-moeda'
 import ItemCarrinho from '@/components/ItemCarrinho'
 import styles from './Carrinho.module.scss'
 
@@ -22,7 +23,9 @@ const Carrinho = () => {
             <div className={styles.totalCompra}>
                 <p className={styles.textoTotal}>
                     Total da compra{' '}
-                    <strong className={styles.valorTotal}>R$ 65,80</strong>
+                    <strong className={styles.valorTotal}>
+                        {formatador.format(data?.carrinho.total || 0)}
+                    </strong>
                 </p>
                 <AbBotao texto="Finalizar compra" />
             </div>
