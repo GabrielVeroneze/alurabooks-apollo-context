@@ -10,6 +10,7 @@ export const OBTER_CARRINHO = gql`
                     preco
                 }
                 livro {
+                    id
                     titulo
                     descricao
                     imagemCapa
