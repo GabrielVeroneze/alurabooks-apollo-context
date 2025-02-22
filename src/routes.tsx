@@ -5,6 +5,7 @@ import AreaLogada from '@/pages/AreaLogada'
 import Pedidos from '@/pages/Pedidos'
 import Categoria from '@/pages/Categoria'
 import DetalhesLivro from '@/pages/DetalhesLivro'
+import Carrinho from '@/pages/Carrinho'
 
 const AppRoutes = () => {
     return (
@@ -12,6 +13,7 @@ const AppRoutes = () => {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
+                    <Route path="minha-sacola" element={<Carrinho />} />
                     <Route path="minha-conta" element={<AreaLogada />}>
                         <Route path="pedidos" element={<Pedidos />} />
                     </Route>
