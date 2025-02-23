@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { CarrinhoContext } from './CarrinhoContext'
 
-export const useCarrinho = () => {
+export const useCarrinhoContext = () => {
     const { carrinho, setCarrinho } = useContext(CarrinhoContext)
 
     return {
