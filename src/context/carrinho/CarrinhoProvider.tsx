@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { CarrinhoCompra } from '@/interfaces/CarrinhoCompra'
+import { useCarrinho } from '@/graphql/carrinho/hooks'
+import { ItemDoCarrinho } from '@/interfaces/ItemDoCarrinho'
 import { CarrinhoContext } from './CarrinhoContext'
 
 interface CarrinhoProviderProps {
@@ -7,13 +7,19 @@ interface CarrinhoProviderProps {
 }
 
 export const CarrinhoProvider = ({ children }: CarrinhoProviderProps) => {
-    const [carrinho, setCarrinho] = useState<CarrinhoCompra>({
-        itens: [],
-        total: 0,
-    })
+    const { data } = useCarrinho()
+
+    const adicionarItemCarrinho = (item: ItemDoCarrinho) => {
+        console.log('[CarrinhoProvider] - adicionarItemCarrinho', item)
+    }
 
     return (
-        <CarrinhoContext.Provider value={{ carrinho, setCarrinho }}>
+        <CarrinhoContext.Provider
+            value={{
+                carrinho: data?.carrinho ?? null,
+                adicionarItemCarrinho: adicionarItemCarrinho,
+            }}
+        >
             {children}
         </CarrinhoContext.Provider>
     )
