@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/client'
-import { OBTER_CARRINHO } from '@/graphql/carrinho/queries'
+import { useMutation, useQuery } from '@apollo/client'
+import { ADICIONAR_ITEM, OBTER_CARRINHO } from '@/graphql/carrinho/queries'
 import { CarrinhoCompra } from '@/interfaces/CarrinhoCompra'
 
 export const useCarrinho = () => {
@@ -7,5 +7,13 @@ export const useCarrinho = () => {
 
     return {
         data,
+    }
+}
+
+export const useAdicionarItem = () => {
+    const [adicionaItem] = useMutation(ADICIONAR_ITEM)
+
+    return {
+        adicionaItem,
     }
 }
