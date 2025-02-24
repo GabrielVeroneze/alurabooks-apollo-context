@@ -1,4 +1,4 @@
-import { useCarrinho } from '@/graphql/carrinho/hooks'
+import { useAdicionarItem, useCarrinho } from '@/graphql/carrinho/hooks'
 import { ItemDoCarrinho } from '@/interfaces/ItemDoCarrinho'
 import { CarrinhoContext } from './CarrinhoContext'
 
@@ -8,9 +8,18 @@ interface CarrinhoProviderProps {
 
 export const CarrinhoProvider = ({ children }: CarrinhoProviderProps) => {
     const { data } = useCarrinho()
+    const { adicionaItem } = useAdicionarItem()
 
     const adicionarItemCarrinho = (item: ItemDoCarrinho) => {
-        console.log('[CarrinhoProvider] - adicionarItemCarrinho', item)
+        adicionaItem({
+            variables: {
+                item: {
+                    livroId: item.livro.id,
+                    opcaoCompraId: item.opcaoCompra.id,
+                    quantidade: item.quantidade,
+                },
+            },
+        })
     }
 
     return (
