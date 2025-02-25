@@ -1,120 +1,67 @@
 import { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
-import { Link, useNavigate } from 'react-router-dom'
-import { limparToken, obterToken } from '@/utils/token'
-import { CategoriaDados } from '@/interfaces/CategoriaDados'
-import ModalLoginUsuario from '@/components/ModalLoginUsuario'
-import ModalCadastroUsuario from '@/components/ModalCadastroUsuario'
-import ContaNavegacao from './ContaNavegacao'
+import { Link } from 'react-router-dom'
+import { useCategorias } from '@/graphql/categorias/hooks'
+import { obterToken } from '@/utils/token'
+import CategoriaMenu from './CategoriaMenu'
+import UsuarioNaoLogado from './UsuarioNaoLogado'
+import UsuarioLogado from './UsuarioLogado'
 import logo from './assets/logo.png'
-import usuario from './assets/usuario.svg'
 import styles from './BarraNavegacao.module.scss'
 
-const OBTER_CATEGORIAS = gql`
-    query ObterCategorias {
-        categorias {
-            id
-            nome
-            slug
-        }
-    }
-`
-
 const BarraNavegacao = () => {
+    const { data } = useCategorias()
+
     const [modalLoginAberta, setModalLoginAberta] = useState<boolean>(false)
     const [modalCadastroAberta, setModalCadastroAberta] = useState<boolean>(false)
 
-
-    const navigate = useNavigate()
     const token = obterToken()
 
     const [usuarioEstaLogado, setUsuarioEstaLogado] = useState<boolean>(token !== null)
 
-    const aoEfetuarLogin = () => {
-        setModalLoginAberta(false)
-        setUsuarioEstaLogado(true)
-    }
-
-    const efetuarLogout = () => {
-        setUsuarioEstaLogado(false)
-        limparToken()
-        navigate('/')
-    }
-
     return (
-        <nav className={styles.navbar}>
-            <h1>
-                <Link to="/">
-                    <img src={logo} alt="Logo da AluraBooks" />
-                </Link>
-            </h1>
-            <div className={styles.navegacao}>
-                <h4 className={styles.titulo}>Categorias</h4>
-                <ul className={styles.menu}>
-                    {data?.categorias.map(categoria => (
-                        <li key={categoria.id} className={styles.item}>
-                            <Link
-                                className={styles.link}
-                                to={`/categorias/${categoria.slug}`}
-                            >
-                                {categoria.nome}
-                            </Link>
-                        </li>
-                    ))}
+        <header className={styles.header}>
+            <Link to="/">
+                <img src={logo} alt="Logo da AluraBooks" />
+            </Link>
+            <nav className={styles.navegacao}>
+                <ul className={styles.lista}>
+                    <li className={styles.item}>
+                        <p className={styles.link}>Categorias</p>
+                        <div className={styles.menu}>
+                            {data?.categorias.map(categoria => (
+                                <CategoriaMenu categoria={categoria} />
+                            ))}
+                        </div>
+                    </li>
+                    <li className={styles.item}>
+                        <Link to="/favoritos" className={styles.link}>
+                            Favoritos
+                        </Link>
+                    </li>
+                    <li className={styles.item}>
+                        <Link to="/minha-estante" className={styles.link}>
+                            Minha Estante
+                        </Link>
+                    </li>
                 </ul>
-            </div>
-            <ul className={styles.usuario}>
+            </nav>
+            <div className={styles.usuario}>
                 {!usuarioEstaLogado && (
-                    <>
-                        <li>
-                            <ContaNavegacao
-                                texto="Login"
-                                imagem={usuario}
-                                imagemAlt="Icone representando um usuário"
-                                onClick={() => setModalLoginAberta(true)}
-                            />
-                            <ModalLoginUsuario
-                                aberta={modalLoginAberta}
-                                aoFechar={() => setModalLoginAberta(false)}
-                                aoEfetuarLogin={aoEfetuarLogin}
-                            />
-                        </li>
-                        <li>
-                            <ContaNavegacao
-                                texto="Cadastrar-se"
-                                imagem={usuario}
-                                imagemAlt="Icone representando um usuário"
-                                onClick={() => setModalCadastroAberta(true)}
-                            />
-                            <ModalCadastroUsuario
-                                aberta={modalCadastroAberta}
-                                aoFechar={() => setModalCadastroAberta(false)}
-                            />
-                        </li>
-                    </>
+                    <UsuarioNaoLogado
+                        modalLoginAberta={modalLoginAberta}
+                        modalCadastroAberta={modalCadastroAberta}
+                        setModalLoginAberta={setModalLoginAberta}
+                        setModalCadastroAberta={setModalCadastroAberta}
+                        setUsuarioEstaLogado={setUsuarioEstaLogado}
+                    />
                 )}
                 {usuarioEstaLogado && (
-                    <>
-                        <li>
-                            <Link
-                                className={styles.conta}
-                                to="/minha-conta/pedidos"
-                            >
-                                Minha conta
-                            </Link>
-                        </li>
-                        <li>
-                            <ContaNavegacao
-                                texto="Logout"
-                                imagem={usuario}
-                                imagemAlt="Icone representando um usuário"
-                                onClick={efetuarLogout}
-                            />
-                        </li>
-                    </>
+                    <UsuarioLogado
+                        setUsuarioEstaLogado={setUsuarioEstaLogado}
+                    />
                 )}
-            </ul>
-        </nav>
+            </div>
+        </header>
     )
 }
 
