@@ -3,7 +3,7 @@ import styles from './ComprarLivro.module.scss'
 
 interface ComprarLivroProps {
     quantidade: number
-    setQuantidade: React.Dispatch<React.SetStateAction<number>>
+    setQuantidade: (valor: number) => void
     adicionarItem: () => void
 }
 
