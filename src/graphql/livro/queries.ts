@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 export const OBTER_LIVRO = gql`
     query ObterLivro($slug: String!) {
         livro(slug: $slug) {
+            id
             titulo
             descricao
             imagemCapa
