@@ -1,22 +1,21 @@
-import { useState } from 'react'
 import { AbGrupoOpcao, AbGrupoOpcoes } from 'ds-alurabooks'
 import styles from './FormatoLivro.module.scss'
 
 interface FormatoLivroProps {
+    opcaoCompra: AbGrupoOpcao | null
+    setOpcaoCompra: React.Dispatch<React.SetStateAction<AbGrupoOpcao | null>>
     opcoes: AbGrupoOpcao[]
 }
 
-const FormatoLivro = ({ opcoes }: FormatoLivroProps) => {
-    const [opcao, setOpcao] = useState<AbGrupoOpcao | null>(null)
-
+const FormatoLivro = ({ opcaoCompra, setOpcaoCompra, opcoes }: FormatoLivroProps) => {
     return (
         <div className={styles.formato}>
             <h3 className={styles.titulo}>Selecione o formato de seu livro:</h3>
             <div className={styles.opcoes}>
                 <AbGrupoOpcoes
                     opcoes={opcoes}
-                    valorPadrao={opcao}
-                    onChange={setOpcao}
+                    valorPadrao={opcaoCompra}
+                    onChange={setOpcaoCompra}
                 />
             </div>
             <p className={styles.texto}>
