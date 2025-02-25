@@ -1,13 +1,13 @@
-import styles from './ContaNavegacao.module.scss'
+import styles from './BotaoIcone.module.scss'
 
-interface ContaNavegacaoProps {
+interface BotaoIconeProps {
     texto: string
     imagem: string
     imagemAlt: string
     onClick: () => void
 }
 
-const ContaNavegacao = ({ texto, imagem, imagemAlt, onClick }: ContaNavegacaoProps) => {
+const BotaoIcone = ({ texto, imagem, imagemAlt, onClick }: BotaoIconeProps) => {
     return (
         <button className={styles.botao} onClick={() => onClick()}>
             <img src={imagem} alt={imagemAlt} />
@@ -16,4 +16,4 @@ const ContaNavegacao = ({ texto, imagem, imagemAlt, onClick }: ContaNavegacaoPro
     )
 }
 
-export default ContaNavegacao
+export default BotaoIcone
