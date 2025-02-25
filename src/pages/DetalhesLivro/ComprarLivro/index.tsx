@@ -1,14 +1,17 @@
-import { useState } from 'react'
 import { AbBotao, AbInputQuantidade } from 'ds-alurabooks'
 import styles from './ComprarLivro.module.scss'
 
-const ComprarLivro = () => {
-    const [quantidade, setQuantidade] = useState<number>(0)
+interface ComprarLivroProps {
+    quantidade: number
+    setQuantidade: React.Dispatch<React.SetStateAction<number>>
+    adicionarItem: () => void
+}
 
+const ComprarLivro = ({ quantidade, setQuantidade, adicionarItem }: ComprarLivroProps) => {
     return (
         <div className={styles.comprar}>
             <AbInputQuantidade value={quantidade} onChange={setQuantidade} />
-            <AbBotao texto="Comprar" />
+            <AbBotao texto="Comprar" onClick={adicionarItem} />
         </div>
     )
 }
