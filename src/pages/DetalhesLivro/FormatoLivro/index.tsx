@@ -3,7 +3,7 @@ import styles from './FormatoLivro.module.scss'
 
 interface FormatoLivroProps {
     opcaoCompra: AbGrupoOpcao | null
-    setOpcaoCompra: React.Dispatch<React.SetStateAction<AbGrupoOpcao | null>>
+    setOpcaoCompra: (opcao: AbGrupoOpcao | null) => void
     opcoes: AbGrupoOpcao[]
 }
 
