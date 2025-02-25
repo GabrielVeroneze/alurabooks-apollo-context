@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { AbTag } from 'ds-alurabooks'
+import { AbGrupoOpcao, AbTag } from 'ds-alurabooks'
 import { useLivro } from '@/graphql/livro/hooks'
+import { useCarrinhoContext } from '@/context/carrinho/useCarrinhoContext'
 import { formatarOpcoesCompra } from '@/utils/formatador-opcoes-compra'
 import Loader from '@/components/Loader'
 import TituloPrincipal from '@/components/TituloPrincipal'
@@ -13,6 +15,30 @@ import styles from './DetalhesLivro.module.scss'
 const DetalhesLivro = () => {
     const params = useParams()
     const { data, loading, error } = useLivro(params.slug || '')
+    const { adicionarItemCarrinho } = useCarrinhoContext()
+
+    const [quantidade, setQuantidade] = useState<number>(1)
+    const [opcaoSelecionada, setOpcaoSelecionada] = useState<AbGrupoOpcao | null>(null)
+
+    const aoAdicionarItemAoCarrinho = () => {
+        if (!data?.livro) {
+            return
+        }
+
+        const opcaoCompra = data.livro.opcoesCompra.find(
+            opcao => opcao.id === opcaoSelecionada?.id
+        )
+
+        if (!opcaoCompra) {
+            return
+        }
+
+        adicionarItemCarrinho({
+            livro: data.livro,
+            quantidade: quantidade,
+            opcaoCompra: opcaoCompra,
+        })
+    }
 
     if (error) {
         return <h1>Ops! Algum erro inesperado aconteceu</h1>
@@ -38,9 +64,15 @@ const DetalhesLivro = () => {
                         autor={data.livro.autor.nome}
                     />
                     <FormatoLivro
+                        opcaoCompra={opcaoSelecionada}
+                        setOpcaoCompra={setOpcaoSelecionada}
                         opcoes={formatarOpcoesCompra(data.livro.opcoesCompra)}
                     />
-                    <ComprarLivro />
+                    <ComprarLivro
+                        quantidade={quantidade}
+                        setQuantidade={setQuantidade}
+                        adicionarItem={aoAdicionarItemAoCarrinho}
+                    />
                 </div>
                 <div className={styles.sobre}>
                     <Sobre
