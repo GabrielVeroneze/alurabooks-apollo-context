@@ -24,7 +24,6 @@ const BarraNavegacao = () => {
     const [modalLoginAberta, setModalLoginAberta] = useState<boolean>(false)
     const [modalCadastroAberta, setModalCadastroAberta] = useState<boolean>(false)
 
-    const { data } = useQuery<{ categorias: CategoriaDados[] }>(OBTER_CATEGORIAS)
 
     const navigate = useNavigate()
     const token = obterToken()
