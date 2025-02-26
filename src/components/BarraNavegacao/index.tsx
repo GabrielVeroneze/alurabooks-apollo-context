@@ -29,7 +29,7 @@ const BarraNavegacao = () => {
                         <p className={styles.link}>Categorias</p>
                         <div className={styles.menu}>
                             {data?.categorias.map(categoria => (
-                                <CategoriaMenu categoria={categoria} />
+                                <CategoriaMenu key={categoria.id} categoria={categoria} />
                             ))}
                         </div>
                     </li>
