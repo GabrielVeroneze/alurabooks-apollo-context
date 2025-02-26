@@ -1,0 +1,58 @@
+@use '@/sass/variaveis' as *;
+
+.container {
+    align-items: flex-start;
+    background-color: $branco;
+    border: 1px solid #002F52;
+    box-shadow: 4px 4px 4px 0px #00000040;
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    position: absolute;
+    top: 80px;
+    width: 330px;
+
+    .titulo {
+        color: $amarelo-alaranjado;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 30px;
+    }
+
+    .lista {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .item {
+            border-bottom: 1px solid #eb9b00;
+            padding-bottom: 2rem;
+
+            .livroTitulo {
+                color: #002f52;
+                font-size: 1.5rem;
+                font-weight: 700;
+                line-height: 36px;
+                margin-bottom: 0.5rem;
+            }
+
+            .livroAutor {
+                color: #000000d9;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 24px;
+            }
+
+            &:last-child {
+                border: none;
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    .botao {
+        font-family: $fonte-secundaria;
+        font-weight: 700;
+    }
+}
