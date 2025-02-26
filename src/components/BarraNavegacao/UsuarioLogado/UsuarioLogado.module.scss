@@ -1,5 +1,11 @@
-.conta {
-    color: inherit;
-    padding: 0.625rem;
-    text-decoration: none;
+.sacola {
+    display: flex;
+    height: 80px;
+    position: relative;
+
+    &:hover {
+        > div {
+            display: flex;
+        }
+    }
 }
