@@ -8,7 +8,7 @@ interface CategoriaMenuProps {
 
 const CategoriaMenu = ({ categoria }: CategoriaMenuProps) => {
     return (
-        <div key={categoria.id} className={styles.opcao}>
+        <div className={styles.opcao}>
             <Link className={styles.link} to={`/categorias/${categoria.slug}`}>
                 {categoria.nome}
             </Link>
