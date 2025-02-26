@@ -1,6 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { limparToken } from '@/utils/token'
 import BotaoIcone from '@/components/BotaoIcone'
+import CarrinhoFlutuante from '@/components/CarrinhoFlutuante'
+import sacola from '../assets/sacola.svg'
 import usuario from '../assets/usuario.svg'
 import styles from './UsuarioLogado.module.scss'
 
@@ -19,10 +21,13 @@ const UsuarioLogado = ({ setUsuarioEstaLogado }: UsuarioLogadoProps) => {
 
     return (
         <>
-            <div>
-                <Link className={styles.conta} to="/minha-conta/pedidos">
-                    Minha conta
-                </Link>
+            <div className={styles.sacola}>
+                <BotaoIcone
+                    texto="Minha sacola"
+                    imagem={sacola}
+                    imagemAlt="Ícone representando uma sacola"
+                />
+                <CarrinhoFlutuante />
             </div>
             <div>
                 <BotaoIcone
