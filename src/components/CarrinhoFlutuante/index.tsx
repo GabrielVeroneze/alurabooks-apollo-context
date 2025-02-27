@@ -12,7 +12,7 @@ const CarrinhoFlutuante = () => {
             <h4 className={styles.titulo}>Resumo da compra</h4>
             <ul className={styles.lista}>
                 {carrinho?.itens.map(carrinho => (
-                    <li className={styles.item}>
+                    <li key={carrinho.livro.id} className={styles.item}>
                         <h5 className={styles.livroTitulo}>
                             {carrinho.livro.titulo}
                         </h5>
