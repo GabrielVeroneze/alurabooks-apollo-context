@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { AbInputQuantidade } from 'ds-alurabooks'
+import { useCarrinhoContext } from '@/context/carrinho/useCarrinhoContext'
 import { formatador } from '@/utils/formatador-moeda'
 import { ItemDoCarrinho } from '@/interfaces/ItemDoCarrinho'
 import lixeira from './assets/lixeira.svg'
@@ -10,7 +10,15 @@ interface ItemCarrinhoProps {
 }
 
 const ItemCarrinho = ({ item }: ItemCarrinhoProps) => {
-    const [quantidade, setQuantidade] = useState<number>(item.quantidade)
+    const { adicionarItemCarrinho } = useCarrinhoContext()
+
+    const alterarQuantidadeDoItem = (quantidade: number) => {
+        adicionarItemCarrinho({
+            livro: item.livro,
+            quantidade: quantidade,
+            opcaoCompra: item.opcaoCompra,
+        })
+    }
 
     return (
         <li className={styles.item}>
@@ -32,8 +40,8 @@ const ItemCarrinho = ({ item }: ItemCarrinhoProps) => {
                     </p>
                 </div>
                 <AbInputQuantidade
-                    value={quantidade}
-                    onChange={setQuantidade}
+                    value={item.quantidade}
+                    onChange={alterarQuantidadeDoItem}
                 />
                 <button className={styles.botao}>
                     <img src={lixeira} alt="Ícone de uma lixeira" />
