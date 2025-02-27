@@ -11,7 +11,11 @@ export const useCarrinho = () => {
 }
 
 export const useAdicionarItem = () => {
-    const [adicionaItem] = useMutation(ADICIONAR_ITEM)
+    const [adicionaItem] = useMutation(ADICIONAR_ITEM, {
+        refetchQueries: [
+            'ObterCarrinho'
+        ],
+    })
 
     return {
         adicionaItem,
