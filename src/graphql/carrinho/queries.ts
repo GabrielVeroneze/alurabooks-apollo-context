@@ -7,6 +7,7 @@ export const OBTER_CARRINHO = gql`
             itens {
                 quantidade
                 opcaoCompra {
+                    id
                     preco
                 }
                 livro {
