@@ -52,7 +52,10 @@ const ItemCarrinho = ({ item }: ItemCarrinhoProps) => {
                     value={item.quantidade}
                     onChange={alterarQuantidadeDoItem}
                 />
-                <button className={styles.botao}>
+                <button
+                    className={styles.botao}
+                    onClick={() => removerItemCarrinho(item)}
+                >
                     <img src={lixeira} alt="Ícone de uma lixeira" />
                 </button>
             </div>
