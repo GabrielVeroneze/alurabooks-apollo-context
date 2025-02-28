@@ -22,11 +22,16 @@ export const CarrinhoProvider = ({ children }: CarrinhoProviderProps) => {
         })
     }
 
+    const removerItemCarrinho = (item: ItemDoCarrinho) => {
+        console.log('[CarrinhoProvider] - removerItemCarrinho', item)
+    }
+
     return (
         <CarrinhoContext.Provider
             value={{
                 carrinho: data?.carrinho ?? null,
                 adicionarItemCarrinho: adicionarItemCarrinho,
+                removerItemCarrinho: removerItemCarrinho,
             }}
         >
             {children}
