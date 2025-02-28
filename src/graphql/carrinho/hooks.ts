@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client'
-import { ADICIONAR_ITEM, OBTER_CARRINHO } from '@/graphql/carrinho/queries'
+import { ADICIONAR_ITEM, OBTER_CARRINHO, REMOVER_ITEM } from '@/graphql/carrinho/queries'
 import { CarrinhoCompra } from '@/interfaces/CarrinhoCompra'
 
 export const useCarrinho = () => {
@@ -19,5 +19,17 @@ export const useAdicionarItem = () => {
 
     return {
         adicionaItem,
+    }
+}
+
+export const useRemoverItem = () => {
+    const [removeItem] = useMutation(REMOVER_ITEM, {
+        refetchQueries: [
+            'ObterCarrinho'
+        ]
+    })
+
+    return {
+        removeItem
     }
 }
