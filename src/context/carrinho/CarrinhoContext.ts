@@ -6,12 +6,14 @@ interface CarrinhoContextType {
     carrinho: CarrinhoCompra | null
     adicionarItemCarrinho: (item: ItemDoCarrinho) => void
     removerItemCarrinho: (item: ItemDoCarrinho) => void
+    carregando: boolean
 }
 
 const defaultValue: CarrinhoContextType = {
     carrinho: null,
     adicionarItemCarrinho: () => {},
     removerItemCarrinho: () => {},
+    carregando: false,
 }
 
 export const CarrinhoContext = createContext<CarrinhoContextType>(defaultValue)
