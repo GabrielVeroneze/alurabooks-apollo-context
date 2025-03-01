@@ -3,15 +3,16 @@ import { ADICIONAR_ITEM, OBTER_CARRINHO, REMOVER_ITEM } from '@/graphql/carrinho
 import { CarrinhoCompra } from '@/interfaces/CarrinhoCompra'
 
 export const useCarrinho = () => {
-    const { data } = useQuery<{ carrinho: CarrinhoCompra }>(OBTER_CARRINHO)
+    const { data, loading } = useQuery<{ carrinho: CarrinhoCompra }>(OBTER_CARRINHO)
 
     return {
         data,
+        loading,
     }
 }
 
 export const useAdicionarItem = () => {
-    const [adicionaItem] = useMutation(ADICIONAR_ITEM, {
+    const [adicionaItem, { loading }] = useMutation(ADICIONAR_ITEM, {
         refetchQueries: [
             'ObterCarrinho'
         ],
@@ -19,6 +20,7 @@ export const useAdicionarItem = () => {
 
     return {
         adicionaItem,
+        loading,
     }
 }
 
