@@ -7,8 +7,8 @@ interface CarrinhoProviderProps {
 }
 
 export const CarrinhoProvider = ({ children }: CarrinhoProviderProps) => {
-    const { data } = useCarrinho()
-    const { adicionaItem } = useAdicionarItem()
+    const { data, loading: loadingCarrinho } = useCarrinho()
+    const { adicionaItem, loading: loadingAdicionar } = useAdicionarItem()
     const { removeItem } = useRemoverItem()
 
     const adicionarItemCarrinho = (item: ItemDoCarrinho) => {
@@ -41,6 +41,7 @@ export const CarrinhoProvider = ({ children }: CarrinhoProviderProps) => {
                 carrinho: data?.carrinho ?? null,
                 adicionarItemCarrinho: adicionarItemCarrinho,
                 removerItemCarrinho: removerItemCarrinho,
+                carregando: loadingCarrinho || loadingAdicionar
             }}
         >
             {children}
