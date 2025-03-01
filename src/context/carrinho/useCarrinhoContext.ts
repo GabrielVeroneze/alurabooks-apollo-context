@@ -6,11 +6,13 @@ export const useCarrinhoContext = () => {
         carrinho,
         adicionarItemCarrinho,
         removerItemCarrinho,
+        carregando,
     } = useContext(CarrinhoContext)
 
     return {
         carrinho,
         adicionarItemCarrinho,
         removerItemCarrinho,
+        carregando,
     }
 }
