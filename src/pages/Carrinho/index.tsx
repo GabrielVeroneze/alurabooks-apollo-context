@@ -4,10 +4,11 @@ import { useCarrinhoContext } from '@/context/carrinho/useCarrinhoContext'
 import { formatador } from '@/utils/formatador-moeda'
 import TituloPrincipal from '@/components/TituloPrincipal'
 import ItemCarrinho from '@/components/ItemCarrinho'
+import LoadingCarrinho from './LoadingCarrinho'
 import styles from './Carrinho.module.scss'
 
 const Carrinho = () => {
-    const { carrinho } = useCarrinhoContext()
+    const { carrinho, carregando } = useCarrinhoContext()
 
     return (
         <section>
@@ -33,6 +34,7 @@ const Carrinho = () => {
                     <AbBotao texto="Finalizar compra" />
                 </div>
             </div>
+            {carregando && <LoadingCarrinho />}
         </section>
     )
 }
